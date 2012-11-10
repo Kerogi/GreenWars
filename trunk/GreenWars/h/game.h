@@ -23,14 +23,10 @@ public:
 
     // update will be called a fixed number of times per second
     // regardless of visual framerate
-    void Update();
+    void Update(int dt);
     // render will be called as fast as possible (but not faster
     // than the update rate)
     void Render();
-
-private:
-    CIwFVec2 m_Position;
-    CIwSVec2 m_Size;
 };
 
 #endif
