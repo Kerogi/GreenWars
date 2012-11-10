@@ -8,10 +8,12 @@ files
     main.cpp
     game.cpp
 	json_parser.cpp
+	soundmanager.cpp
     (h)
     game.h
 	baseobject.h
 	json_parser.h
+	soundmanager.h
 }
 
 includepaths
@@ -22,4 +24,14 @@ includepaths
 subprojects
 {
     iw2d
+}
+
+assets
+{
+    (data)
+	# Sound
+	sounds.cfg
+	Shot1.pcm
+	Shot2.pcm
+	Shot3.pcm
 }
