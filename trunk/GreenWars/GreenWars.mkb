@@ -7,9 +7,11 @@ files
     (src)
     main.cpp
     game.cpp
+	json_parser.cpp
     (h)
     game.h
 	baseobject.h
+	json_parser.h
 }
 
 includepaths
