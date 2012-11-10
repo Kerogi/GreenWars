@@ -1,4 +1,4 @@
-GreenWars
+﻿GreenWars
 =========
 
 GreenWars (WorkTitle)
@@ -6,3 +6,5 @@ GreenWars (WorkTitle)
 Hackathon project. Game prototype.
 
 Приветы! (От Kerogi)
+
+Привет! (От Тёмы)
