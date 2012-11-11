@@ -15,11 +15,22 @@
 #include "s3e.h"
 #include "Iw2D.h"
 #include "game.h"
+#include "GameCommand.h"
 
 // "main" is the S3E entry point
 int main()
 {
     Iw2DInit();
+	char buffer[64];
+	CMovePlayerCommand cmd1;
+	cmd1.Target_x = 100.0;
+	cmd1.Target_y = 0;
+	cmd1.PlayerName = "player1";
+
+	CMovePlayerCommand cmd2;
+	cmd1.Target_x = -100.0;
+	cmd1.Target_y = -50;
+	cmd1.PlayerName = "player2";
 
     // create game object
     uint64 lastUpdateTime = s3eTimerGetMs();
@@ -30,6 +41,13 @@ int main()
    
 	CGame* pGame = new CGame(surface_width, surface_height);
 	pGame->StartLevel("Level1");
+
+	pGame->CreatePlayer("player1", 100, 50, 0,0);
+	pGame->CreatePlayer("player2", -20, -20, 80,10);
+
+	pGame->ProcessCommand(&cmd1);
+	pGame->ProcessCommand(&cmd2);
+
 	pGame->CreateControls();
 
     while(!s3eDeviceCheckQuitRequest())

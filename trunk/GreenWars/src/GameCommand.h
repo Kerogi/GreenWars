@@ -21,7 +21,7 @@ public:
 
 	virtual bool Deserialize(char* ByteBuffer, int length) = 0;
 	virtual void Serialize(char* ByteBuffer, int length) = 0;
-	virtual bool Act() = 0;
+	virtual const uint16* getMap();
 
 	friend class CCommandFactory;
 };
@@ -36,7 +36,7 @@ public:
 public:
 	virtual bool Deserialize(char* ByteBuffer, int length);
 	virtual void Serialize(char* ByteBuffer, int length);
-	virtual bool Act();
+	virtual const uint16* getMap();
 
 	friend class CCommandFactory;
 };

@@ -17,6 +17,7 @@
 
 #include "IwGeom.h"
 #include "IwArray.h"
+#include <map>
 
 class CLevel;
 class CControls;
@@ -43,7 +44,7 @@ public:
 
 	bool ProcessCommand(CGameCommand* cmd);
 
-	void CreatePlayer(const char* name);
+	void CreatePlayer(const char* name, float x, float y, float target_x, float target_y);
 	bool StartLevel(const char* level_name);
 	bool CreateControls();
 	void Reset();

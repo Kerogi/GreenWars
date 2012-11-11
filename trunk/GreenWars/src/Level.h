@@ -21,6 +21,7 @@ public:
 	void Start();
 	void Stop();
 	void Update(float dt);
+	void AddObject(CGameObject* obj);
 
 	static CLevel* CreateTestLevel(float width, float height, CObjectCreator* objectCreator);
 };

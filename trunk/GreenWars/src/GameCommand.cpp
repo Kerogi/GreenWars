@@ -1,4 +1,7 @@
 #include "GameCommand.h"
+#include "IwGx.h"
+#include "IwGxPrint.h"
+#include "IwSerialise.h"
 
 CGameCommand* CCommandFactory::CreateCommandFromBuffre(char* ByteBuffer, int length)
 {
@@ -28,6 +31,12 @@ CGameCommand::CGameCommand()
 
 }
 
+const uint16* CGameCommand::getMap()
+{
+	static uint16 mmap[] = { IW_TYPE_UINT16 };
+	return mmap;
+}
+
 CMovePlayerCommand::CMovePlayerCommand()
 {
 	Type = PLAYER_MOVE_COMMAND;
@@ -35,37 +44,25 @@ CMovePlayerCommand::CMovePlayerCommand()
 
 void  CMovePlayerCommand::Serialize(char* ByteBuffer, int length)
 {
-	std::strstream bf(ByteBuffer, length);
-	int left = length;
-	bf.write(reinterpret_cast<char*>(&Type), sizeof(CommandType));
-	bf.write(reinterpret_cast<char*>(&Target_x), sizeof(float));
-	bf.write(reinterpret_cast<char*>(&Target_y), sizeof(float));
-	int len = PlayerName.length();
-	bf.write(reinterpret_cast<char*>(&len), sizeof(int));
-	bf.write(PlayerName.c_str(), sizeof(char) * PlayerName.length());
-	left -= bf.tellp();
-	bf.flush();
+	IwSerialiseOpenFromMemory (ByteBuffer, length, false);
+	// serialise out using the above-defined structure
+    IwSerialiseMappedData(getMap(), this, 1, sizeof(this));
 
-
+	IwSerialiseClose();
 }
 
 bool CMovePlayerCommand::Deserialize(char* ByteBuffer, int length)
 {
-	std::strstream bf(ByteBuffer, length);
-	int left = length;
-	bf.read(reinterpret_cast<char*>(&Target_x), sizeof(float));
-	bf.read(reinterpret_cast<char*>(&Target_y), sizeof(float));
-	int len = 0;
-	bf.read(reinterpret_cast<char*>(&len), sizeof(float));
-	char* sPlayerName = 0;
-	left -= bf.tellp();
-	bf.read(sPlayerName, length);
-	PlayerName = sPlayerName;
-
+	IwSerialiseOpenFromMemory (ByteBuffer, length, true);
+	// serialise out using the above-defined structure
+    IwSerialiseMappedData(getMap(), this, 1, sizeof(this));
+	
+	IwSerialiseClose();
 	return true;
 }
 
-bool CMovePlayerCommand::Act()
+const uint16* CMovePlayerCommand::getMap()
 {
-	return false;
+	static uint16 mmap[] = { IW_TYPE_UINT16 , IW_TYPE_FLOAT, IW_TYPE_FLOAT, IW_TYPE_ARRAY(IW_TYPE_CHAR, 16)};
+	return mmap;
 }
