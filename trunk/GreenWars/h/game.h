@@ -16,10 +16,12 @@
 #define GAME_H
 
 #include "IwGeom.h"
+#include "IwArray.h"
 
 class CLevel;
 class CIwGameSpriteManager;
 class CObjectCreator;
+class CPlayer;
 
 class CGame
 {
@@ -30,12 +32,15 @@ class CGame
 	int ScreenWidth;
 	int ScreenHeight;
 	CIwMat2D	WorldTransform;
+
+	CIwArray<CPlayer*> Players;
 public:
     CGame(int screen_width, int screen_height);
     ~CGame();
 
+	void CreatePlayer(const char* name);
 	bool StartLevel(const char* level_name);
-	bool Reset();
+	void Reset();
 
     // update will be called a fixed number of times per second
     // regardless of visual framerate

@@ -21,6 +21,7 @@
 #include "IwGameSprite.h"
 #include "level.h"
 #include "objectcreator.h"
+#include "player.h"
 
 CGame::CGame(int screen_width, int screen_height)
 	:ScreenWidth(screen_width)
@@ -31,8 +32,12 @@ CGame::CGame(int screen_width, int screen_height)
 {
 }
 
-
 CGame::~CGame()
+{
+	Reset();
+}
+
+void CGame::Reset()
 {
 	if(Level) delete Level;
 	if(SpriteManger) delete SpriteManger;
@@ -60,13 +65,20 @@ bool CGame::StartLevel(const char* level_name)
 	return true;
 }
 
+void CGame::CreatePlayer(const char* name)
+{
+	Players.push_back(new CPlayer(name, ObjectCreator->CreateObjectByName("palyer")));
+}
+
 void CGame::Update(float dt)
 {
     // game logic goes here
 	if(Level)
 		Level->Update(dt);
+	//update players
+	for (CIwArray<CPlayer*>::iterator it = Players.begin(); it != Players.end(); ++it)
+		(*it)->Update(dt);
 }
-
 
 void CGame::Render()
 {
