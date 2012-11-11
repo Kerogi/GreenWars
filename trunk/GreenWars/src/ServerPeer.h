@@ -6,7 +6,7 @@
 
 
 class sServer;
-
+class CGame;
 class sPeer
 {
 private:
@@ -22,9 +22,10 @@ private:
 
 public:
 	bool IsAlive;
+	CGame* m_game;
 	s3eThread* loop_thread;
 
-	sPeer();
+	sPeer(CGame* pGame);
 	sPeer(sServer* pServer);
 
 	static void* Loop(void* arg);
@@ -34,10 +35,6 @@ public:
 	void Dissconnect();
 
 	void Send(char* pData);
-
-	/*bool Send(char* data);
-	char* Recive();*/
-	//~sPeer();
 };
 
 class sServer
@@ -51,7 +48,9 @@ private:
 	
 public:
 
-	sServer();
+	CGame* m_game;
+
+	sServer(CGame* pGame);
 	void Start();
 	void Stop();
 

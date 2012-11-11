@@ -33,6 +33,9 @@ CGame::CGame(int screen_width, int screen_height)
 	,SpriteManger(NULL)
 	,ObjectCreator(NULL) 
 {
+	g_IsServer = true;
+	g_GameMode = MODE_TITLE;
+	Title = new TitleScreen(this);
 }
 
 CGame::~CGame()
@@ -46,6 +49,9 @@ void CGame::Reset()
 	if(Controls) delete Controls;
 	if(SpriteManger) delete SpriteManger;
 	if(ObjectCreator) delete ObjectCreator;
+	if(Title) delete Title;
+	if(g_server) delete g_server;
+	if(g_peer) delete g_peer;
 }
 
 bool CGame::StartLevel(const char* level_name)
@@ -98,6 +104,11 @@ void CGame::CreatePlayer(const char* name, float x, float y, float target_x, flo
 
 void CGame::Update(float dt)
 {
+	if (g_GameMode == MODE_TITLE)
+	{
+		Title->Update();
+		return;
+	}
     // game logic goes here
 	if(Level)
 		Level->Update(dt);
@@ -109,6 +120,13 @@ void CGame::Update(float dt)
 void CGame::Render()
 {
 	IwGxClear(IW_GX_COLOUR_BUFFER_F | IW_GX_DEPTH_BUFFER_F);
+
+	if (g_GameMode == MODE_TITLE)
+	{
+		Title->Render();
+		return;
+	}
+
 	if(SpriteManger)
 	{
 		WorldTransform.SetIdentity();

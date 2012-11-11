@@ -15,8 +15,9 @@ using namespace std;
 //----------SERVER implementation-----------
 
 
-sServer::sServer()
+sServer::sServer(CGame* pGame)
 {
+	m_game = pGame;
 }
 
 void sServer::Start()
@@ -87,11 +88,12 @@ sServer::~sServer()
 
 //----------PEER implementation-----------
 
-sPeer::sPeer()
+sPeer::sPeer(CGame* pGame)
 {
 	m_server = NULL;
 	m_socket = NULL;
 	m_address = NULL;
+	m_game = pGame;
 	m_clientSockConnected = false;
 	m_lock = s3eThreadLockCreate();
 	IsAlive = false;
@@ -102,6 +104,7 @@ sPeer::sPeer(sServer* pServer)
 	m_server = pServer;
 	m_socket = NULL;
 	m_address = NULL;
+	m_game = pServer->m_game;
 	m_clientSockConnected = false;
 	m_lock = s3eThreadLockCreate();
 	IsAlive = false;
@@ -121,7 +124,7 @@ void* sPeer::Loop(void* arg)
 		s3eThreadLockRelease(peer->m_lock);
 		if (rtn>0)
 		{
-
+			//peer->m_game->...
 		}
 		s3eDeviceYield();
 	}
