@@ -36,24 +36,28 @@ CLevel* CLevel::CreateTestLevel(float width, float height, CObjectCreator* objec
 	int num = 12;
 	double da = 0;
 	double di = PI*2.0/(double)num;
-	//for(int i=0;i<=num;++i,da+=di)
-	//{	
-	//	CGameObject* go = objectCreator->CreateObjectByName("test1");
-	//	if(go == NULL) continue;
-	//	
-	//	double dx = cos(da);
-	//	double dy = sin(da);
-	//	float x = 0 + dx * 100;
-	//	float y = 0 + dy * 100;
-	//	go->setPos(x,y);
-	//	go->setDir(dx,dy);
-	//	go->setSpeed(0.002501);
-	//	go->setSize(0.5f);
-	//	level->Objects.push_back(go);
-	//}
+	for(int i=0;i<=num;++i,da+=di)
+	{	
+		CGameObject* go = objectCreator->CreateObjectByName("test1");
+		if(go == NULL) continue;
+		
+		double dx = cos(da);
+		double dy = sin(da);
+		float x = 0 + dx * 100;
+		float y = 0 + dy * 100;
+		go->setPos(x,y);
+		go->setDir(dx,dy);
+		go->setSpeed(-5);
+		go->setSize(0.5f);
+		level->Objects.push_back(go);
+	}
+	/*
 	CGameObject* go = objectCreator->CreateObjectByName("test1");
 	go->setPos(100,0);
 	go->setSize(0.5f);
+	go->setDir(-1,-1);
+	go->setSpeed(5);
 	level->Objects.push_back(go);
+	*/
 	return level;
 }

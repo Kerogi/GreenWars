@@ -27,7 +27,7 @@ bool CGameObject::Update(float dt)
 	if(Sprite)
 	{
 		Sprite->setAngle(IwGeomAtan2(IW_FIXED(Dirrection.x),IW_FIXED(Dirrection.y)));
-		Sprite->setPosition(IW_FIXED(Position.x),IW_FIXED(Position.y));
+		Sprite->setPosition(Position.x, Position.y);
 		Sprite->setScale(IW_FIXED(Size));
 	}
 	return true;
