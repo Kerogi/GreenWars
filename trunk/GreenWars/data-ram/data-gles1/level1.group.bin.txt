@@ -1,0 +1,11 @@
+ResGroupResources:
+	CIwTexture (0x3521f539)
+		"test1" (0x106b7536)
+		Size: 25636
+	CIwTexture (0x3521f539)
+		"test2" (0x106b7537)
+		Size: 25636
+	ResList 'CIwTexture' pos:37 size:51282
+
+ResGroupResources: Wrote 51286 bytes to CIwResGroup "Level1"
+
