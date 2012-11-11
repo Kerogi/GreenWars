@@ -33,7 +33,7 @@ void CLevel::Update(float dt)
 CLevel* CLevel::CreateTestLevel(float width, float height, CObjectCreator* objectCreator)
 {
 	CLevel* level = new CLevel();
-	int num = 12;
+	int num = 112;
 	double da = 0;
 	double di = PI*2.0/(double)num;
 	for(int i=0;i<=num;++i,da+=di)
@@ -47,7 +47,7 @@ CLevel* CLevel::CreateTestLevel(float width, float height, CObjectCreator* objec
 		float y = 0 + dy * 100;
 		go->setPos(x,y);
 		go->setDir(dx,dy);
-		go->setSpeed(-5);
+		go->setSpeed(-50);
 		go->setSize(0.5f);
 		level->Objects.push_back(go);
 	}
