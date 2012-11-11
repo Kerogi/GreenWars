@@ -22,6 +22,7 @@ class CLevel;
 class CIwGameSpriteManager;
 class CObjectCreator;
 class CPlayer;
+class CGameCommand;
 
 class CGame
 {
@@ -37,6 +38,8 @@ class CGame
 public:
     CGame(int screen_width, int screen_height);
     ~CGame();
+
+	bool ProcessCommand(CGameCommand* cmd);
 
 	void CreatePlayer(const char* name);
 	bool StartLevel(const char* level_name);
