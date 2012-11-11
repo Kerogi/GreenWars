@@ -26,6 +26,7 @@ int main()
 {
     Iw2DInit();
 
+
     // create game object
     CGame* pGame = new CGame;
 

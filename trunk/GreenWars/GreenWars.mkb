@@ -17,15 +17,15 @@ files
 	ObjectCreator.cpp
 	ObjectCreator.h
 
-    (h)
-    game.h
+	soundmanager.cpp
+   game.h
 	baseobject.h
 	json_parser.h
 
 	[Data]
 	(data)
 	Level1.group
-}
+	soundmanager.h
 
 includepaths
 {
@@ -35,4 +35,14 @@ includepaths
 subprojects
 {
     iw2d
+}
+
+assets
+{
+    (data)
+	# Sound
+	sounds.cfg
+	Shot1.pcm
+	Shot2.pcm
+	Shot3.pcm
 }
