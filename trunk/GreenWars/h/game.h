@@ -20,7 +20,7 @@
 #include <map>
 #include "Iw2D.h"
 #include "s3eOSReadString.h"
-#include "ServerPeer.h"
+#include "..\src\ServerPeer.h"
 
 enum GameMode
 {
@@ -86,7 +86,6 @@ public:
     TitleScreen(CGame* pGame)
     {
 		m_game= pGame;
-
         hbY = 80;
 		hbH = 50;
 
@@ -163,7 +162,7 @@ public:
 
 		Iw2DFillRect(CIwSVec2(hbX-hbW/2, hbY-hbH/2), CIwSVec2(hbW, hbH));
 		Iw2DFillRect(CIwSVec2(jbX-jbW/2, jbY-jbH/2), CIwSVec2(jbW, jbH));
-        
+
 		Iw2DSurfaceShow();
     }
 };

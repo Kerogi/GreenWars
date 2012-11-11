@@ -17,7 +17,7 @@ files
 	ObjectCreator.cpp
 	ObjectCreator.h
 	soundmanager.cpp
-	ServerPeer.cpp
+	ServerPeer.cpp	
 	ServerPeer.h
 	Controls.cpp
 	Controls.h
@@ -30,7 +30,7 @@ files
 	baseobject.h
 	json_parser.h
 	soundmanager.h
-
+	
 	[Data]
 	(data)
 	Level1.group
