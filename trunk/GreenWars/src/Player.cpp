@@ -23,10 +23,17 @@ void CPlayer::setSize(float size)
 	cachesSquaredSize = size*size;
 }
 
-void CPlayer::moveTo(float x, float y)
+void CPlayer::goTo(float x, float y)
 {
 	MovePos.x = x;
 	MovePos.y = y;
+}
+
+void CPlayer::moveTo(float x, float y)
+{	
+	MovePos = ControlledObject->getPos();
+	MovePos.x += x;
+	MovePos.y += y;
 }
 
 void CPlayer::lookAt(float x, float y)

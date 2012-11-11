@@ -22,12 +22,12 @@ int main()
 {
     Iw2DInit();
 	char buffer[64];
-	CMovePlayerCommand cmd1;
+	CGotoPlayerCommand cmd1;
 	cmd1.Target_x = 100.0;
 	cmd1.Target_y = 0;
 	cmd1.PlayerName = "player1";
 
-	CMovePlayerCommand cmd2;
+	CGotoPlayerCommand cmd2;
 	cmd1.Target_x = -100.0;
 	cmd1.Target_y = -50;
 	cmd1.PlayerName = "player2";

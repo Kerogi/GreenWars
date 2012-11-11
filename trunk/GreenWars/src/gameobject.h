@@ -14,11 +14,12 @@ class CGameObject: public CBaseObject
 	CIwFVec2	Dirrection;				// Position of the sprite
 	float		Speed;
 	float		Size;
-
+	bool		AdvancedMovement;
 	friend class CObjectCreator;
 	CGameObject();
 public:
 	//CGameObject(const CGameObject&);
+	void setAdvancedMovement(bool movement);
 
 	const CIwFVec2& getPos() const		{ return Position;  }
 	void setPos(const CIwFVec2& pos)	{ Position = pos;   }

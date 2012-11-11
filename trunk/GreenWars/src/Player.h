@@ -19,6 +19,7 @@ public:
 	friend class CGame;
 	void setSize(float size);
 	void setPos(float x, float y);
+	void goTo(float x, float y);
 	void moveTo(float x, float y);
 	void lookAt(float x, float y);
 	void Update(float dt);

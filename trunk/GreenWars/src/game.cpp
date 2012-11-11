@@ -129,15 +129,29 @@ bool CGame::ProcessCommand(CGameCommand *cmd)
 {
 	switch(cmd->getType())
 	{
-		case PLAYER_MOVE_COMMAND:
+		case PLAYER_GOTO_COMMAND:
 			{
-				CMovePlayerCommand* movecmd = dynamic_cast<CMovePlayerCommand*>(cmd);
-				if(NULL != movecmd )
+				CGotoPlayerCommand* acmd = dynamic_cast<CGotoPlayerCommand*>(cmd);
+				if(NULL != acmd )
 				{
 					for (CIwArray<CPlayer*>::iterator it = Players.begin(); it != Players.end(); ++it)
-					if((*it)->Name == movecmd->PlayerName)
+					if((*it)->Name == acmd->PlayerName)
 					{
-						(*it)->moveTo(movecmd->Target_x, movecmd->Target_y);
+						(*it)->moveTo(acmd->Target_x, acmd->Target_y);
+					}
+				}
+			}
+			break;
+
+		case PLAYER_MOVE_COMMAND:
+			{
+				CMovePlayerCommand* acmd = dynamic_cast<CMovePlayerCommand*>(cmd);
+				if(NULL != acmd )
+				{
+					for (CIwArray<CPlayer*>::iterator it = Players.begin(); it != Players.end(); ++it)
+					if((*it)->Name == acmd->PlayerName)
+					{
+						(*it)->moveTo(acmd->Delta_x, acmd->Delta_y);
 					}
 				}
 			}

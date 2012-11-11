@@ -6,6 +6,7 @@
 enum CommandType
 {
 		HEARTBEAT=0,
+		PLAYER_GOTO_COMMAND, 
 		PLAYER_MOVE_COMMAND 
 } ;
 
@@ -26,11 +27,26 @@ public:
 	friend class CCommandFactory;
 };
 
-class CMovePlayerCommand: public CGameCommand
+class CGotoPlayerCommand: public CGameCommand
 {
 public:
 	float Target_x;
 	float Target_y;
+	CIwStringS PlayerName;
+	CGotoPlayerCommand();
+public:
+	virtual bool Deserialize(char* ByteBuffer, int length);
+	virtual void Serialize(char* ByteBuffer, int length);
+	virtual const uint16* getMap();
+
+	friend class CCommandFactory;
+};
+
+class CMovePlayerCommand: public CGameCommand
+{
+public:
+	float Delta_x;
+	float Delta_y;
 	CIwStringS PlayerName;
 	CMovePlayerCommand();
 public:
@@ -40,7 +56,6 @@ public:
 
 	friend class CCommandFactory;
 };
-
 
 class CCommandFactory
 {

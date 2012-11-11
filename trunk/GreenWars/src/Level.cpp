@@ -54,6 +54,7 @@ CLevel* CLevel::CreateTestLevel(float width, float height, CObjectCreator* objec
 		go->setDir(cos(da+di),sin(da+di));
 		go->setSpeed(-100+50*(i%2));
 		go->setSize(0.5f);
+		go->setAdvancedMovement(true);
 		level->Objects.push_back(go);
 	}
 

@@ -8,6 +8,7 @@ CGameObject::CGameObject()
 	,Speed(0)
 	,Size(1)
 	,Sprite(NULL)
+	,AdvancedMovement(false)
 {
 }
 /*
@@ -21,14 +22,23 @@ CGameObject::CGameObject(const CGameObject& copyMe)
 	
 }
 **/
+void CGameObject::setAdvancedMovement(bool movement)
+{
+	AdvancedMovement = movement;
+}
+
 bool CGameObject::Update(float dt)
 {
 	Position += Dirrection * Speed * dt;
-	//CIwFVec2 AttractorPoint(0,0);
-	//AttractorPoint -= Position;
-	//AttractorPoint.Normalise();
-	//Dirrection -= AttractorPoint *0.02f;
-	//Dirrection.Normalise();
+	if(AdvancedMovement)
+	{
+		CIwFVec2 AttractorPoint(0,0);
+		AttractorPoint -= Position;
+		AttractorPoint.Normalise();
+		Dirrection -= AttractorPoint *0.02f;
+		Dirrection.Normalise();
+	}
+
 	if(Sprite)
 	{
 		Sprite->setAngle(IwGeomAtan2(IW_FIXED(-Dirrection.x),IW_FIXED(Dirrection.y)));

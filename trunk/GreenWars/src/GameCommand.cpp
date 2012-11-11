@@ -9,6 +9,15 @@ CGameCommand* CCommandFactory::CreateCommandFromBuffre(char* ByteBuffer, int len
 	CGameCommand* cmd = 0;
 	switch(type)
 	{
+		case PLAYER_GOTO_COMMAND:
+		{
+			cmd = new CGotoPlayerCommand();
+			if(!cmd->Deserialize(ByteBuffer+sizeof(CommandType), length-1))
+			{
+				delete cmd;
+				cmd = 0;
+			}
+		}
 		case PLAYER_MOVE_COMMAND:
 		{
 			cmd = new CMovePlayerCommand();
@@ -62,6 +71,36 @@ bool CMovePlayerCommand::Deserialize(char* ByteBuffer, int length)
 }
 
 const uint16* CMovePlayerCommand::getMap()
+{
+	static uint16 mmap[] = { IW_TYPE_UINT16 , IW_TYPE_FLOAT, IW_TYPE_FLOAT, IW_TYPE_ARRAY(IW_TYPE_CHAR, 16)};
+	return mmap;
+}
+
+CGotoPlayerCommand::CGotoPlayerCommand()
+{
+	Type = PLAYER_GOTO_COMMAND;
+}
+
+void  CGotoPlayerCommand::Serialize(char* ByteBuffer, int length)
+{
+	IwSerialiseOpenFromMemory (ByteBuffer, length, false);
+	// serialise out using the above-defined structure
+    IwSerialiseMappedData(getMap(), this, 1, sizeof(this));
+
+	IwSerialiseClose();
+}
+
+bool CGotoPlayerCommand::Deserialize(char* ByteBuffer, int length)
+{
+	IwSerialiseOpenFromMemory (ByteBuffer, length, true);
+	// serialise out using the above-defined structure
+    IwSerialiseMappedData(getMap(), this, 1, sizeof(this));
+	
+	IwSerialiseClose();
+	return true;
+}
+
+const uint16* CGotoPlayerCommand::getMap()
 {
 	static uint16 mmap[] = { IW_TYPE_UINT16 , IW_TYPE_FLOAT, IW_TYPE_FLOAT, IW_TYPE_ARRAY(IW_TYPE_CHAR, 16)};
 	return mmap;
