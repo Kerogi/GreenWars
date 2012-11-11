@@ -16,16 +16,17 @@ files
 	Level.h
 	ObjectCreator.cpp
 	ObjectCreator.h
-
 	soundmanager.cpp
-   game.h
+	(h)
+	game.h
 	baseobject.h
 	json_parser.h
+	soundmanager.h
 
 	[Data]
 	(data)
 	Level1.group
-	soundmanager.h
+}
 
 includepaths
 {
