@@ -5,7 +5,10 @@ ResGroupResources:
 	CIwTexture (0x3521f539)
 		"test2" (0x106b7537)
 		Size: 25636
-	ResList 'CIwTexture' pos:37 size:51282
+	CIwTexture (0x3521f539)
+		"player" (0x14fa6292)
+		Size: 25636
+	ResList 'CIwTexture' pos:37 size:76918
 
-ResGroupResources: Wrote 51286 bytes to CIwResGroup "Level1"
+ResGroupResources: Wrote 76922 bytes to CIwResGroup "Level1"
 

@@ -120,6 +120,8 @@ void CGame::Render()
 	}
 
 	Controls->Draw();
+	Controls->UpdateControls();
+
     Iw2DSurfaceShow();
 }
 

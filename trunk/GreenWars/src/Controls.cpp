@@ -21,13 +21,12 @@ CControls * CControls::CreateControls(float width, float height)
 	int crosY = height - 50;
 
 	CControls* controls = new CControls();
-		
+
 	controls->ScreenWidth = width;
 	controls->ScreenHeight = height;
 
-
 	CIw2DImage* image;
-	
+
 	image = Iw2DCreateImageResource("touchscreenMoveDown");
 	if(image)
 	{
@@ -36,6 +35,8 @@ CControls * CControls::CreateControls(float width, float height)
 		sprite->setPosAngScale(crosX, crosY + 20, 0, IW_GEOM_ONE/2);
 		sprite->setImage(image);
 		controls->SpriteManager.addSprite(sprite);
+		HitZone hz = {sprite->getPosition().x, sprite->getPosition().y, image->GetWidth(), image->GetHeight()};
+		controls->hitZones.append(hz);
 	}
 
 	image = Iw2DCreateImageResource("touchscreenMoveUp");
@@ -46,6 +47,8 @@ CControls * CControls::CreateControls(float width, float height)
 		sprite->setPosAngScale(crosX, crosY - 20, 0, IW_GEOM_ONE/2);
 		sprite->setImage(image);
 		controls->SpriteManager.addSprite(sprite);
+		HitZone hz = {sprite->getPosition().x, sprite->getPosition().y, image->GetWidth(), image->GetHeight()};
+		controls->hitZones.append(hz);
 	}
 
 	image = Iw2DCreateImageResource("touchscreenMoveL");
@@ -56,6 +59,8 @@ CControls * CControls::CreateControls(float width, float height)
 		sprite->setPosAngScale(crosX - 20, crosY, 0, IW_GEOM_ONE/2);
 		sprite->setImage(image);
 		controls->SpriteManager.addSprite(sprite);
+		HitZone hz = {sprite->getPosition().x, sprite->getPosition().y, image->GetWidth(), image->GetHeight()};
+		controls->hitZones.append(hz);
 	}
 
 	image = Iw2DCreateImageResource("touchscreenMoveR");
@@ -66,6 +71,8 @@ CControls * CControls::CreateControls(float width, float height)
 		sprite->setPosAngScale(crosX + 20, crosY, 0, IW_GEOM_ONE/2);
 		sprite->setImage(image);
 		controls->SpriteManager.addSprite(sprite);
+		HitZone hz = {sprite->getPosition().x, sprite->getPosition().y, image->GetWidth(), image->GetHeight()};
+		controls->hitZones.append(hz);
 	}
 
 	return controls;
@@ -79,10 +86,30 @@ void CControls::Draw()
 	SpriteManager.Draw();
 }
 
+bool CControls::CheckHit(HitZone * hzone)
+{
+	int x = s3ePointerGetX();
+	int y = s3ePointerGetY();
+
+	return((hzone->x<x)&&((hzone->x + hzone->w)>x)&&(hzone->y<y)&&((hzone->y + hzone->h)>y));
+}
+
 void CControls::UpdateControls()
 {
-    s3ePointerUpdate();
-    s3eKeyboardUpdate();
+	s3ePointerUpdate();
+	s3eKeyboardUpdate();
 
-
+	if (s3ePointerGetState(S3E_POINTER_BUTTON_SELECT) & S3E_POINTER_STATE_DOWN)
+	{
+		for(CIwArray<HitZone>::iterator it = hitZones.begin(); it != hitZones.end(); ++it)
+		{
+			if(CheckHit(it))
+			{
+				//CIw2DImage qwe;
+				//qwe.
+				// Hit detected
+				return;
+			}
+		}
+	}
 }
