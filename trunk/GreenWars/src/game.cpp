@@ -37,5 +37,5 @@ void CGame::Render()
     // game render goes here
 
     // show the surface
-    Iw2DSurfaceShow();
+    //Iw2DSurfaceShow();
 }

@@ -5,17 +5,15 @@
 class CBaseObject
 {
 public:
-	/// Update object state according to dt(time interval)
+	virtual ~CBaseObject() {};
+	/// Update object state according to dt(time interval in sec)
 	/// @param dt - time interval to evalute new object state
-	void Update(int dt) = 0;
+	virtual bool Update(float dt) = 0;
 	/// Returns current object state
 	/// @return Current state of object
-	int GetState() = 0;
-	/// Checks collision with other object
-	/// @param obj - object for collision checking
-	void Collision(const CBaseObject & obj) = 0;
+	virtual int GetState() = 0;
 	/// Draw object
-	void Draw() = 0;
+	virtual void Draw() = 0;
 };
 
 #endif BASEOBJECT_H

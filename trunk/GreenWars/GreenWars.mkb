@@ -8,10 +8,23 @@ files
     main.cpp
     game.cpp
 	json_parser.cpp
+	IwGameSprite.cpp
+	IwGameSprite.h
+	GameObject.cpp
+	GameObject.h
+	Level.cpp
+	Level.h
+	ObjectCreator.cpp
+	ObjectCreator.h
+
     (h)
     game.h
 	baseobject.h
 	json_parser.h
+
+	[Data]
+	(data)
+	Level1.group
 }
 
 includepaths
