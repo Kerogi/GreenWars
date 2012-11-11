@@ -189,7 +189,7 @@ bool sPeer::Connect(char* hostname)
     if (m_clientSockConnected == false)
 		return false;
 
-	m_address = addr;
+	m_address = &addr;
 	IsAlive = true;
 	return true;
 }
