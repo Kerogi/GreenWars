@@ -3,9 +3,12 @@
 #include "objectcreator.h"
 #include "IwGameSprite.h"
 #include "Iw2D.h"
+#include "game.h"
 
-CControls::CControls(void)
+CControls::CControls(CGame & game)
+	: Game(game)
 {
+	
 }
 
 CControls::~CControls(void)
@@ -15,12 +18,12 @@ CControls::~CControls(void)
 }
 
 
-CControls * CControls::CreateControls(float width, float height)
+CControls * CControls::CreateControls(float width, float height, CGame & game)
 {
 	int crosX = 50;
 	int crosY = height - 50;
 
-	CControls* controls = new CControls();
+	CControls* controls = new CControls(game);
 
 	controls->ScreenWidth = width;
 	controls->ScreenHeight = height;

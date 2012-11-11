@@ -77,7 +77,7 @@ bool CGame::CreateControls()
 	if(NULL == Level1Group) return false;
 	IwGetResManager()->SetCurrentGroup(Level1Group);	
 
-	Controls = CControls::CreateControls(ScreenWidth, ScreenHeight);
+	Controls = CControls::CreateControls(ScreenWidth, ScreenHeight, *this);
 	if(NULL == Level) return false;
 	Level->Start();
 

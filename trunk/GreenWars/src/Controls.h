@@ -3,8 +3,12 @@
 #include "IwArray.h"
 #include "IwGameSprite.h"
 
+class CGame;
+
 class CControls
 {
+	CGame & Game;
+
 	int ScreenWidth;
 	int ScreenHeight;
 
@@ -19,11 +23,11 @@ class CControls
 	CIwArray<HitZone> hitZones;
 
 
-	CControls(void);
+	CControls(CGame & game);
 public:
 	~CControls(void);
 
-	static CControls * CreateControls(float width, float height);
+	static CControls * CreateControls(float width, float height, CGame & game);
 
 	void Draw();
 
