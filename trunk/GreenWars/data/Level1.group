@@ -13,6 +13,7 @@ CIwResGroup
 	// Graphics
 	"./test1.png"
 	"./test2.png"
+	"./player.png"
 
 	// Sound sample WAV files
 	//"./explosion.wav"
