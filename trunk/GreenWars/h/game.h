@@ -102,14 +102,34 @@ public:
             s3eDeviceRequestQuit();
         }
 
+		bool hostClicked = false;
+		bool joinClicked = false;
+
 		if ((s3eKeyboardGetState(s3eKey1) & S3E_KEY_STATE_PRESSED))
+			hostClicked = true;
+		else if ((s3eKeyboardGetState(s3eKey2) & S3E_KEY_STATE_PRESSED))
+			hostClicked = true;
+		else if ((s3ePointerGetState(S3E_POINTER_BUTTON_SELECT) & S3E_POINTER_STATE_DOWN))
+		{
+			int x = s3ePointerGetX();
+			int y = s3ePointerGetY();
+
+			if (x<hbX+hbW/2 && x>hbX-hbW/2 &&
+				y<hbY+hbH/2 && y>hbY-hbH/2)
+				hostClicked = true;
+			else if (x<jbX+jbW/2 && x>jbX-jbW/2 &&
+				y<jbY+jbH/2 && y>jbY-jbH/2)
+				joinClicked = true;
+		}
+
+		if (hostClicked)
         {
 			m_game->g_IsServer = true;
 			m_game->g_server = new sServer(m_game);
 			m_game->g_peer = NULL;
             // Start game
             m_game->g_GameMode = MODE_GAMEPLAY;
-        } else if ((s3eKeyboardGetState(s3eKey2) & S3E_KEY_STATE_PRESSED))
+        } else if (joinClicked)
 		{
 			m_game->g_IsServer = false;
 			m_game->g_server = NULL;
@@ -137,8 +157,12 @@ public:
 		jbX = displayWidth/2;
 		jbW = displayWidth - 50;
 
-		Iw2DDrawRect(CIwSVec2(hbX-hbW/2, hbY-hbH/2), CIwSVec2(hbW, hbH));
-		Iw2DDrawRect(CIwSVec2(jbX-jbW/2, jbY-jbH/2), CIwSVec2(jbW, jbH));
+		//CIwColour *c = new CIwColour();
+		//c->r=200;c->b=200;c->g=200;
+		//Iw2DSetColour(*c);
+
+		Iw2DFillRect(CIwSVec2(hbX-hbW/2, hbY-hbH/2), CIwSVec2(hbW, hbH));
+		Iw2DFillRect(CIwSVec2(jbX-jbW/2, jbY-jbH/2), CIwSVec2(jbW, jbH));
         
 		Iw2DSurfaceShow();
     }
