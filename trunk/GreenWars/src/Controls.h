@@ -2,6 +2,7 @@
 
 #include "IwArray.h"
 #include "IwGameSprite.h"
+#include "GameCommand.h"
 
 class CGame;
 
@@ -18,6 +19,7 @@ class CControls
 	struct HitZone
 	{
 		int x,y,w,h;
+		CMovePlayerCommand cmd;
 	};
 
 	CIwArray<HitZone> hitZones;

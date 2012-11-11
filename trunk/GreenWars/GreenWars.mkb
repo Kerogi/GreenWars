@@ -23,6 +23,8 @@ files
 	Controls.h
 	player.cpp
 	player.h
+	GameCommand.cpp
+	GameCommand.h
 	(h)
 	game.h
 	baseobject.h
