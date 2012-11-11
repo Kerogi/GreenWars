@@ -1,37 +1,77 @@
 #include "Controls.h"
 #include "gameobject.h"
 #include "objectcreator.h"
+#include "IwGameSprite.h"
+#include "Iw2D.h"
 
 CControls::CControls(void)
 {
 }
 
-
 CControls::~CControls(void)
 {
-	for (Iterator it = Objects.begin(); it != Objects.end(); ++it)
+	for (CIwArray<CIw2DImage*>::iterator it = ImageCache.begin(); it != ImageCache.end(); ++it)
 		delete (*it);
 }
 
 
-CControls * CControls::CreateControls(float width, float height, CObjectCreator * objectCreator)
+CControls * CControls::CreateControls(float width, float height)
 {
+	int crosX = 50;
+	int crosY = height - 50;
+
 	CControls* controls = new CControls();
 	
-	CGameObject* go = objectCreator->CreateObjectByName("touchscreenMoveDown");
-	go->setPos(0,0);
-	go->setSize(0.5f);
-	controls->Objects.push_back(go);
-	CGameObject* go = objectCreator->CreateObjectByName("touchscreenMoveUP");
-	go->setPos(0,0);
-	go->setSize(0.5f);
-	controls->Objects.push_back(go);
-	CGameObject* go = objectCreator->CreateObjectByName("touchscreenMoveL");
-	go->setPos(0,0);
-	go->setSize(0.5f);
-	controls->Objects.push_back(go);
-	CGameObject* go = objectCreator->CreateObjectByName("touchscreenMoveR");
-	go->setPos(0,0);
-	go->setSize(0.5f);
-	controls->Objects.push_back(go);
+	CIw2DImage* image;
+	
+	image = Iw2DCreateImageResource("touchscreenMoveDown");
+	if(image)
+	{
+		controls->ImageCache.append(image);
+		CIwGameBitmapSprite* sprite = new CIwGameBitmapSprite();
+		sprite->setPosAngScale(crosX, crosY + 20, 0, IW_GEOM_ONE/2);
+		sprite->setImage(image);
+		controls->SpriteManager.addSprite(sprite);
+	}
+
+	image = Iw2DCreateImageResource("touchscreenMoveUp");
+	if(image)
+	{
+		controls->ImageCache.append(image);
+		CIwGameBitmapSprite* sprite = new CIwGameBitmapSprite();
+		sprite->setPosAngScale(crosX, crosY - 20, 0, IW_GEOM_ONE/2);
+		sprite->setImage(image);
+		controls->SpriteManager.addSprite(sprite);
+	}
+
+	image = Iw2DCreateImageResource("touchscreenMoveL");
+	if(image)
+	{
+		controls->ImageCache.append(image);
+		CIwGameBitmapSprite* sprite = new CIwGameBitmapSprite();
+		sprite->setPosAngScale(crosX - 20, crosY, 0, IW_GEOM_ONE/2);
+		sprite->setImage(image);
+		controls->SpriteManager.addSprite(sprite);
+	}
+
+	image = Iw2DCreateImageResource("touchscreenMoveR");
+	if(image)
+	{
+		controls->ImageCache.append(image);
+		CIwGameBitmapSprite* sprite = new CIwGameBitmapSprite();
+		sprite->setPosAngScale(crosX + 20, crosY, 0, IW_GEOM_ONE/2);
+		sprite->setImage(image);
+		controls->SpriteManager.addSprite(sprite);
+	}
+
+	return controls;
 }
+
+void CControls::Draw()
+{
+	CIwMat2D WorldTransform;
+	WorldTransform.SetIdentity();
+	SpriteManager.setTransform(WorldTransform);
+	SpriteManager.Draw();
+}
+

@@ -21,6 +21,8 @@ files
 	ServerPeer.h
 	Controls.cpp
 	Controls.h
+	player.cpp
+	player.h
 	(h)
 	game.h
 	baseobject.h
@@ -30,6 +32,7 @@ files
 	[Data]
 	(data)
 	Level1.group
+	Controls.group
 }
 
 includepaths

@@ -19,12 +19,14 @@
 #include "IwArray.h"
 
 class CLevel;
+class CControls;
 class CIwGameSpriteManager;
 class CObjectCreator;
 class CPlayer;
 
 class CGame
 {
+	CControls * Controls;
 	CLevel* Level;
 	CIwGameSpriteManager* SpriteManger;
 	CObjectCreator*  ObjectCreator; 
@@ -40,6 +42,7 @@ public:
 
 	void CreatePlayer(const char* name);
 	bool StartLevel(const char* level_name);
+	bool CreateControls();
 	void Reset();
 
     // update will be called a fixed number of times per second
