@@ -1,20 +1,19 @@
 #pragma once
 
 #include "IwArray.h"
-
-class CGameObject;
-class CObjectCreator;
+#include "IwGameSprite.h"
 
 class CControls
 {
-	typedef CIwArray<CGameObject*> ObjectsList;
-	typedef ObjectsList::iterator	Iterator;
-
-	ObjectsList Objects;
+	CIwGameSpriteManager SpriteManager;
+	CIwArray<CIw2DImage*> ImageCache;
 
 	CControls(void);
 public:
 	~CControls(void);
-	CControls * CreateControls(float width, float height, CObjectCreator * objectCreator);
+
+	static CControls * CreateControls(float width, float height);
+
+	void Draw();
 };
 

@@ -30,6 +30,7 @@ int main()
    
 	CGame* pGame = new CGame(surface_width, surface_height);
 	pGame->StartLevel("Level1");
+	pGame->CreateControls();
 
     while(!s3eDeviceCheckQuitRequest())
     {

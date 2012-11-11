@@ -20,6 +20,7 @@
 #include "game.h"
 #include "IwGameSprite.h"
 #include "level.h"
+#include "Controls.h"
 #include "objectcreator.h"
 #include "player.h"
 
@@ -27,6 +28,7 @@ CGame::CGame(int screen_width, int screen_height)
 	:ScreenWidth(screen_width)
 	,ScreenHeight(screen_height)
 	,Level(NULL)
+	,Controls(NULL)
 	,SpriteManger(NULL)
 	,ObjectCreator(NULL) 
 {
@@ -40,6 +42,7 @@ CGame::~CGame()
 void CGame::Reset()
 {
 	if(Level) delete Level;
+	if(Controls) delete Controls;
 	if(SpriteManger) delete SpriteManger;
 	if(ObjectCreator) delete ObjectCreator;
 }
@@ -59,6 +62,22 @@ bool CGame::StartLevel(const char* level_name)
 	ObjectCreator = new CObjectCreator(SpriteManger);
 	
 	Level = CLevel::CreateTestLevel(100, 100, ObjectCreator);
+	if(NULL == Level) return false;
+	Level->Start();
+
+	return true;
+}
+
+bool CGame::CreateControls()
+{
+	CIwStringS levelGroup("Controls.group");
+	if(NULL == IwGetResManager()->LoadGroup(levelGroup.c_str())) return false;
+
+	CIwResGroup* Level1Group = IwGetResManager()->GetGroupNamed("Controls");
+	if(NULL == Level1Group) return false;
+	IwGetResManager()->SetCurrentGroup(Level1Group);	
+
+	Controls = CControls::CreateControls(ScreenWidth, ScreenHeight);
 	if(NULL == Level) return false;
 	Level->Start();
 
@@ -92,5 +111,7 @@ void CGame::Render()
 		SpriteManger->setTransform(WorldTransform);
 		SpriteManger->Draw();
 	}
+
+	Controls->Draw();
     Iw2DSurfaceShow();
 }
