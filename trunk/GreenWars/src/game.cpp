@@ -23,6 +23,7 @@
 #include "Controls.h"
 #include "objectcreator.h"
 #include "player.h"
+#include "GameCommand.h"
 
 CGame::CGame(int screen_width, int screen_height)
 	:ScreenWidth(screen_width)
@@ -84,9 +85,15 @@ bool CGame::CreateControls()
 	return true;
 }
 
-void CGame::CreatePlayer(const char* name)
+void CGame::CreatePlayer(const char* name, float x, float y, float target_x, float target_y)
 {
-	Players.push_back(new CPlayer(name, ObjectCreator->CreateObjectByName("palyer")));
+	CGameObject *obj = ObjectCreator->CreateObjectByName("player");
+	CPlayer* player = new CPlayer(name, obj);
+	player->setPos(x,y);
+	player->moveTo(target_x, target_y);
+	Players.append(player);
+
+	Level->AddObject(obj);
 }
 
 void CGame::Update(float dt)
@@ -95,8 +102,8 @@ void CGame::Update(float dt)
 	if(Level)
 		Level->Update(dt);
 	//update players
-	for (CIwArray<CPlayer*>::iterator it = Players.begin(); it != Players.end(); ++it)
-		(*it)->Update(dt);
+	for (CIwArray<CPlayer*>::iterator pi = Players.begin(); pi != Players.end(); ++pi)
+		(*pi)->Update(dt);
 }
 
 void CGame::Render()
@@ -116,4 +123,25 @@ void CGame::Render()
 	Controls->UpdateControls();
 
     Iw2DSurfaceShow();
+}
+
+bool CGame::ProcessCommand(CGameCommand *cmd)
+{
+	switch(cmd->getType())
+	{
+		case PLAYER_MOVE_COMMAND:
+			{
+				CMovePlayerCommand* movecmd = dynamic_cast<CMovePlayerCommand*>(cmd);
+				if(NULL != movecmd )
+				{
+					for (CIwArray<CPlayer*>::iterator it = Players.begin(); it != Players.end(); ++it)
+					if((*it)->Name == movecmd->PlayerName)
+					{
+						(*it)->moveTo(movecmd->Target_x, movecmd->Target_y);
+					}
+				}
+			}
+			break;
+	}
+	return false;
 }

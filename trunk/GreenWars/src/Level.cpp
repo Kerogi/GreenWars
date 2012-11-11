@@ -30,6 +30,11 @@ void CLevel::Update(float dt)
 		(*it)->Update(dt);
 }
 
+void CLevel::AddObject(CGameObject* obj)
+{
+	Objects.push_back(obj);
+}
+
 CLevel* CLevel::CreateTestLevel(float width, float height, CObjectCreator* objectCreator)
 {
 	CLevel* level = new CLevel();
@@ -51,13 +56,6 @@ CLevel* CLevel::CreateTestLevel(float width, float height, CObjectCreator* objec
 		go->setSize(0.5f);
 		level->Objects.push_back(go);
 	}
-	/*
-	CGameObject* go = objectCreator->CreateObjectByName("test1");
-	go->setPos(100,0);
-	go->setSize(0.5f);
-	go->setDir(-1,-1);
-	go->setSpeed(5);
-	level->Objects.push_back(go);
-	*/
+
 	return level;
 }

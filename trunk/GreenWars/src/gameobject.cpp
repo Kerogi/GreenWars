@@ -24,11 +24,11 @@ CGameObject::CGameObject(const CGameObject& copyMe)
 bool CGameObject::Update(float dt)
 {
 	Position += Dirrection * Speed * dt;
-	CIwFVec2 AttractorPoint(0,0);
-	AttractorPoint -= Position;
-	AttractorPoint.Normalise();
-	Dirrection -= AttractorPoint *0.02f;
-	Dirrection.Normalise();
+	//CIwFVec2 AttractorPoint(0,0);
+	//AttractorPoint -= Position;
+	//AttractorPoint.Normalise();
+	//Dirrection -= AttractorPoint *0.02f;
+	//Dirrection.Normalise();
 	if(Sprite)
 	{
 		Sprite->setAngle(IwGeomAtan2(IW_FIXED(-Dirrection.x),IW_FIXED(Dirrection.y)));
