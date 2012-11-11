@@ -21,7 +21,11 @@ CControls * CControls::CreateControls(float width, float height)
 	int crosY = height - 50;
 
 	CControls* controls = new CControls();
-	
+		
+	controls->ScreenWidth = width;
+	controls->ScreenHeight = height;
+
+
 	CIw2DImage* image;
 	
 	image = Iw2DCreateImageResource("touchscreenMoveDown");
@@ -75,3 +79,10 @@ void CControls::Draw()
 	SpriteManager.Draw();
 }
 
+void CControls::UpdateControls()
+{
+    s3ePointerUpdate();
+    s3eKeyboardUpdate();
+
+
+}

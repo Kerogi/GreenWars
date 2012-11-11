@@ -1,0 +1,17 @@
+ResGroupResources:
+	CIwTexture (0x3521f539)
+		"touchscreenMoveDown" (0x2f9e1c77)
+		Size: 4900
+	CIwTexture (0x3521f539)
+		"touchscreenMoveUP" (0xb6ef3a64)
+		Size: 4900
+	CIwTexture (0x3521f539)
+		"touchscreenMoveL" (0xb035cb6b)
+		Size: 4900
+	CIwTexture (0x3521f539)
+		"touchscreenMoveR" (0xb035cb71)
+		Size: 4900
+	ResList 'CIwTexture' pos:39 size:19610
+
+ResGroupResources: Wrote 19614 bytes to CIwResGroup "Controls"
+

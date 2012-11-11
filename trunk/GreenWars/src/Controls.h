@@ -5,6 +5,9 @@
 
 class CControls
 {
+	int ScreenWidth;
+	int ScreenHeight;
+
 	CIwGameSpriteManager SpriteManager;
 	CIwArray<CIw2DImage*> ImageCache;
 
@@ -15,5 +18,7 @@ public:
 	static CControls * CreateControls(float width, float height);
 
 	void Draw();
+
+	void UpdateControls();
 };
 
