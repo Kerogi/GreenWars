@@ -39,8 +39,8 @@ CControls * CControls::CreateControls(float width, float height, CGame & game)
 		sprite->setImage(image);
 		controls->SpriteManager.addSprite(sprite);
 		HitZone hz = {sprite->getPosition().x, sprite->getPosition().y, image->GetWidth(), image->GetHeight()};
-		hz.cmd.Target_x = 0;
-		hz.cmd.Target_y = 100;
+		hz.cmd.Delta_x = 0;
+		hz.cmd.Delta_y = 10;
 		hz.cmd.PlayerName = "player1";
 		controls->hitZones.append(hz);
 	}
@@ -54,8 +54,8 @@ CControls * CControls::CreateControls(float width, float height, CGame & game)
 		sprite->setImage(image);
 		controls->SpriteManager.addSprite(sprite);
 		HitZone hz = {sprite->getPosition().x, sprite->getPosition().y, image->GetWidth(), image->GetHeight()};
-		hz.cmd.Target_x = 0;
-		hz.cmd.Target_y = -100;
+		hz.cmd.Delta_x = 0;
+		hz.cmd.Delta_y = -10;
 		hz.cmd.PlayerName = "player1";
 		controls->hitZones.append(hz);
 	}
@@ -69,8 +69,8 @@ CControls * CControls::CreateControls(float width, float height, CGame & game)
 		sprite->setImage(image);
 		controls->SpriteManager.addSprite(sprite);
 		HitZone hz = {sprite->getPosition().x, sprite->getPosition().y, image->GetWidth(), image->GetHeight()};
-		hz.cmd.Target_x = -100.0;
-		hz.cmd.Target_y = 0;
+		hz.cmd.Delta_x = -10;
+		hz.cmd.Delta_y = 0;
 		hz.cmd.PlayerName = "player1";
 		controls->hitZones.append(hz);
 	}
@@ -84,8 +84,8 @@ CControls * CControls::CreateControls(float width, float height, CGame & game)
 		sprite->setImage(image);
 		controls->SpriteManager.addSprite(sprite);
 		HitZone hz = {sprite->getPosition().x, sprite->getPosition().y, image->GetWidth(), image->GetHeight()};
-		hz.cmd.Target_x = 100.0;
-		hz.cmd.Target_y = 0;
+		hz.cmd.Delta_x = 10;
+		hz.cmd.Delta_y = 0;
 		hz.cmd.PlayerName = "player1";
 		controls->hitZones.append(hz);
 	}
