@@ -17,6 +17,8 @@ files
 	ObjectCreator.cpp
 	ObjectCreator.h
 	soundmanager.cpp
+	ServerPeer.cpp
+	ServerPeer.h
 	(h)
 	game.h
 	baseobject.h
