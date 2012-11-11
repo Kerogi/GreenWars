@@ -1,5 +1,13 @@
 CIwResGroup
 {
+	name "Controls"
+	// Graphics
+	"./touchscreenMoveDown.png"
+	"./touchscreenMoveUP.png"
+	"./touchscreenMoveL.png"
+	"./touchscreenMoveR.png"
+
+
 	name "Level1"
 
 	// Graphics

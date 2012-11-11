@@ -19,6 +19,8 @@ files
 	soundmanager.cpp
 	ServerPeer.cpp
 	ServerPeer.h
+	Controls.cpp
+	Controls.h
 	(h)
 	game.h
 	baseobject.h
