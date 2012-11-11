@@ -15,15 +15,31 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "IwGeom.h"
+
+class CLevel;
+class CIwGameSpriteManager;
+class CObjectCreator;
+
 class CGame
 {
+	CLevel* Level;
+	CIwGameSpriteManager* SpriteManger;
+	CObjectCreator*  ObjectCreator; 
+
+	int ScreenWidth;
+	int ScreenHeight;
+	CIwMat2D	WorldTransform;
 public:
-    CGame();
+    CGame(int screen_width, int screen_height);
     ~CGame();
+
+	bool StartLevel(const char* level_name);
+	bool Reset();
 
     // update will be called a fixed number of times per second
     // regardless of visual framerate
-    void Update(int dt);
+    void Update(float dt);
     // render will be called as fast as possible (but not faster
     // than the update rate)
     void Render();
